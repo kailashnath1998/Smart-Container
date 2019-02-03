@@ -1,5 +1,6 @@
 package com.texplorium.smartcontainer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -87,8 +88,10 @@ public class FillData extends AppCompatActivity {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             System.out.println("Done");
-                            Toast.makeText(FillData.this, "Done", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(FillData.this, "Done", Toast.LENGTH_LONG).show();
                             Log.d("TAG",Integer.toString(response.code()));
+                            Intent x = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(x);
                         }
                     });
                 } catch (Exception e) {

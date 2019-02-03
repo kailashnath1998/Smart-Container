@@ -128,15 +128,17 @@ public class dispData extends Fragment {
                             obj = (org.json.simple.JSONObject) parser.parse(response.toString());
                             org.json.simple.JSONArray keys = (org.json.simple.JSONArray) parser.parse( obj.get("keys").toString());
                             final DataPoint[] values = new DataPoint[min(30,keys.size())];
+                            int indx = 0;
                             for( int i = max(0,keys.size() - 30); i < keys.size(); i++ ) {
                                 org.json.simple.JSONObject myobj = (org.json.simple.JSONObject) keys.get(i);
                                 double x = Double.parseDouble(myobj.get("time").toString());
                                 double y = Double.parseDouble(myobj.get("value").toString());
                                 System.out.println(x + " , " + y);
                                 DataPoint v = new DataPoint(x, y);
-                                values[i] = v;
+                                values[indx] = v;
                                 minx = min(minx, y);
                                 maxx = max(maxx, y);
+                                indx++;
                             }
                             graph.getViewport().setScrollable(true);
                             graph.getViewport().setMinY(-30);
