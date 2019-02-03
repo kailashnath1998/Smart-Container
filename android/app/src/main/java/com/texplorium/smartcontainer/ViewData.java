@@ -33,44 +33,11 @@ public class ViewData<series> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_data);
-        try {
-            fillDropdown();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     public void onSectionAttached(int anInt) {
 
     }
 
-    public static void fillDropdown() throws IOException, ParseException {
-        URL url = new URL("http://192.168.43.175:3000/sensordata/Temp");
-        HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
-        urlConnection.setRequestMethod("GET");
-        int statusCode = urlConnection.getResponseCode();
-        if (statusCode ==  200) {
-            InputStream it = new BufferedInputStream(urlConnection.getInputStream());
-            InputStreamReader read = new InputStreamReader(it);
-            BufferedReader buff = new BufferedReader(read);
-            StringBuilder dta = new StringBuilder();
-            String chunks ;
-            while((chunks = buff.readLine()) != null)
-            {
-                dta.append(chunks);
-            }
-            System.out.println(dta);
-            JSONParser parser = new JSONParser();
-            JSONObject json = (JSONObject) parser.parse(dta.toString());
-            System.out.println(json);
 
-
-        }
-        else
-        {
-            //Handle else
-        }
-    }
 }

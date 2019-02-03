@@ -40,16 +40,16 @@ public class dispData extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_disp_data, container, false);
 
-//        GraphView graph = (GraphView) rootView.findViewById(R.id.graph1);
-//        mSeries1 = new LineGraphSeries<>(generateData());
-//        graph.addSeries(mSeries1);
+        GraphView graph = (GraphView) rootView.findViewById(R.id.graph2);
+        mSeries1 = new LineGraphSeries<>(generateData());
+        graph.addSeries(mSeries1);
 
-        GraphView graph2 = (GraphView) rootView.findViewById(R.id.graph2);
-        mSeries2 = new LineGraphSeries<>();
-        graph2.addSeries(mSeries2);
-        graph2.getViewport().setXAxisBoundsManual(true);
-        graph2.getViewport().setMinX(0);
-        graph2.getViewport().setMaxX(40);
+//        GraphView graph2 = (GraphView) rootView.findViewById(R.id.graph2);
+//        mSeries2 = new LineGraphSeries<>();
+//        graph2.addSeries(mSeries2);
+//        graph2.getViewport().setXAxisBoundsManual(true);
+//        graph2.getViewport().setMinX(0);
+//        graph2.getViewport().setMaxX(40);
 
         return rootView;
     }
@@ -64,24 +64,24 @@ public class dispData extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        mTimer1 = new Runnable() {
-//            @Override
-//            public void run() {
-//                mSeries1.resetData(generateData());
-//                mHandler.postDelayed(this, 300);
-//            }
-//        };
-//        mHandler.postDelayed(mTimer1, 300);
-
-        mTimer2 = new Runnable() {
+        mTimer1 = new Runnable() {
             @Override
             public void run() {
-                graph2LastXValue += 1d;
-                mSeries2.appendData(new DataPoint(graph2LastXValue, getRandom()), true, 40);
-                mHandler.postDelayed(this, 200);
+                mSeries1.resetData(generateData());
+                mHandler.postDelayed(this, 300);
             }
         };
-        mHandler.postDelayed(mTimer2, 1000);
+        mHandler.postDelayed(mTimer1, 300);
+
+//        mTimer2 = new Runnable() {
+//            @Override
+//            public void run() {
+//                graph2LastXValue += 1d;
+//                mSeries2.appendData(new DataPoint(graph2LastXValue, getRandom()), true, 40);
+//                mHandler.postDelayed(this, 200);
+//            }
+//        };
+//        mHandler.postDelayed(mTimer2, 1000);
     }
 
     @Override
