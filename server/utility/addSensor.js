@@ -16,9 +16,9 @@ var addSensor = async (obj) => {
     capture_date: dat,
     capture_time: time
   });
-  var ret3 = await newVal.save();
+  var ret = await newVal.save();
 
-  return obj;
+  return ret;
 };
 
 

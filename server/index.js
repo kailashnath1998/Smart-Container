@@ -1,9 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var { addSensor } = require("./utility/addSensor.js");
 var { addToBlockChain } = require("./utility/addToBlockChain.js");
+var { addSensor } = require("./utility/addSensor.js");
+var { setLimits } = require("./utility/setLimits.js");
 var { Sensor } = require('./models/sensor');
+var { Limits } = require('./models/limits');
 var path = require("path");
+var moment = require('moment');
+
 
 
 var cors = require('cors');
@@ -47,6 +51,21 @@ app.post('/sensorValues', function (req, res) {
 });
 
 
+app.post('/setLimits', function (req, res) {
+    var data = req.body;
+    console.log(data);
+    setLimits(data).then((ob) => {
+        console.log(ob);
+        res.status(200).send();
+
+    }).catch((err) => {
+        res.status(400).json({ err: err.message });
+    });
+
+});
+
+
+
 app.get('/sensordata/:parameter', function (req, res) {
 
     Sensor.find().then((obj) => {
@@ -58,7 +77,8 @@ app.get('/sensordata/:parameter', function (req, res) {
                 var tmp = {};
                 var time = [];
                 time = obj[i].capture_time.split(":").map(Number);;
-                tmp.time = time;
+                var sec = time[0]*3600 + time[1]*60 + time[2];
+                tmp.time = sec;
                 tmp.value = obj[i].value;
                 keys.push(tmp);
             }
@@ -70,26 +90,10 @@ app.get('/sensordata/:parameter', function (req, res) {
 });
 
 
-app.get("/visualize/sensor/1", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../dashboard/sensor1.html"));
-});
-
-let ct = "5";
-
-app.get("/set", function (req, res) {
-    ct = req.query.val;
-    res.send("Changed Successfully");
-});
-
-app.get("/count", function (req, res) {
-    res.send(ct);
-});
-
 const PORT = 3000;
 const HOST = '0.0.0.0';
 
 
-var server = app.listen(3000, function () {
-    console.log("running");
+app.listen(3000, () => {
+    console.log(`Server Up and Running on 3000`);
 });
-//console.log('Running on http://localhost:3000');
