@@ -29,8 +29,6 @@ var setLimits = async (obj) => {
      else {
         await Limits.create(json);
      }
-    
-    }
 
   });
 
