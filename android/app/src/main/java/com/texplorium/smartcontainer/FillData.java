@@ -72,7 +72,7 @@ public class FillData extends AppCompatActivity {
                 MediaType mediaType = MediaType.parse("application/json");
                 RequestBody body = RequestBody.create(mediaType, "{\n\t\"parameter\": \" "+ parameter.toString()+"\",\n\t\"value\": "+value.toString()+"\n}");
                 Request request = new  Request.Builder()
-                        .url("http://ec2-13-127-242-145.ap-south-1.compute.amazonaws.com:3000/setLimits")
+                        .url("http://ec2-3-82-247-244.compute-1.amazonaws.com/setLimits")
                         .post(body)
                         .addHeader("Content-Type", "application/json")
                         .addHeader("cache-control", "no-cache")

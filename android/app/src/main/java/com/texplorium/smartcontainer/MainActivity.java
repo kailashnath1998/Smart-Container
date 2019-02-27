@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void fillDropdown() throws IOException, ParseException {
         RequestQueue queue = Volley.newRequestQueue( MainActivity.this);
-        String url ="http://192.168.43.175:3000/sensordata/Temp";
+        String url ="http://ec2-3-82-247-244.compute-1.amazonaws.com/sensordata/Temp";
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

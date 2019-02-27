@@ -110,7 +110,7 @@ public class dispData extends Fragment {
     private void generateData() {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String url ="http://ec2-13-127-242-145.ap-south-1.compute.amazonaws.com:3000/sensordata/" + option;
+        String url ="http://ec2-3-82-247-244.compute-1.amazonaws.com/sensordata/" + option;
         System.out.println(url);
 
 // Request a string response from the provided URL.
