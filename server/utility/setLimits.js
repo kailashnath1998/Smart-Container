@@ -22,25 +22,15 @@ var setLimits = async (obj) => {
   }
   var flag = 0;
   //var ret = await Limits.findOneAndUpdate({}, { $set: newVal });
-  var ret = await Limits.find({}).then(async (ob) => {
-
-    for (var i = 0; i < ob.length; i++) {
-      if (ob[i].parameter === obj.parameter) {
-        let parameter = ob[i].parameter;
-        var ret1 = await Limits.updateOne({ "parameter": parameter },
-          { $set: json }
-        );
-        flag = 1;
-        break;
-
-      }
-    }
+  var ret = await Limits.find({parameter : obj.parameter}).then(async (ob) => {
+     if(!ob) {
+        await Limits.findOneAndUpdate({parameter : obj.parameter}, {$set : json});
+     }
+     else {
+        await Limits.create(json);
+     }
 
   });
-  if (flag === 0) {
-    var newVal = new Limits(json);
-    var ret1 = await newVal.save();
-  }
 
 
   return ret;
